@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class WhiskyController {
     }
 
     @GetMapping(value = "/whiskies/distilleries")
-    public ResponseEntity<List<Whisky>> findAllWhiskiesByDistilleryAge(String distillery, int age) {
-        List<Whisky> whiskies = whiskyRepository.findWhiskeyByDistilleryAndAge(distillery, age);
+    public ResponseEntity<List<Whisky>> findAllWhiskiesByDistilleryAge(@RequestParam(name= "name") String distillery,@RequestParam(name="age") int age) {
+        List<Whisky> whiskies = whiskyRepository.findWhiskyByDistilleryNameAndAge(distillery, age);
         return new ResponseEntity<>(whiskies, HttpStatus.OK);
 
     }
